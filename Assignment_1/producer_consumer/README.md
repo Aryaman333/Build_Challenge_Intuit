@@ -8,6 +8,8 @@ An implementation demonstrating concurrent programming concepts: thread synchron
 
 ## Quick Start
 
+Refer to QUICKSTART.md for detailed commands and cli usage.
+
 ```bash
 cd Assignment_1/producer_consumer
 
