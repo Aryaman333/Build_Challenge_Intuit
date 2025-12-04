@@ -1,9 +1,9 @@
 # Assignment 2: Amazon Products Sales Data Analysis
 
-## 📋 Project Overview
+##  Project Overview
 This project provides comprehensive analysis and interactive visualization of Amazon products sales data, focusing on pricing strategies, product performance, and market insights.
 
-## 📊 Dataset Information
+##  Dataset Information
 - **Source**: Amazon Products Sales Data (Cleaned)
 - **Size**: 42,675 products
 - **Features**: 17 columns
@@ -31,7 +31,7 @@ This project provides comprehensive analysis and interactive visualization of Am
 | `product_page_url` | String | Amazon product page URL |
 | `data_collected_at` | String | Data collection timestamp |
 
-## 🎯 Analysis Objectives
+##  Analysis Objectives
 
 ### 1. Exploratory Data Analysis (EDA)
 - Understand dataset structure and quality
@@ -63,16 +63,12 @@ This project provides comprehensive analysis and interactive visualization of Am
 - Temporal patterns (if applicable)
 - Predictive insights for product success
 
-## 📁 Project Structure
+##  Project Structure
 ```
 Assignment_2/
 ├── data/
 │   └── cleaned/
 │       └── amazon_products_sales_data_cleaned.csv
-├── notebooks/
-│   ├── 01_exploratory_data_analysis.ipynb
-│   ├── 02_statistical_analysis.ipynb
-│   └── 03_advanced_insights.ipynb
 ├── scripts/
 │   ├── data_loader.py
 │   ├── visualization.py
@@ -80,19 +76,19 @@ Assignment_2/
 ├── streamlit_app/
 │   ├── app.py
 │   ├── pages/
-│   │   ├── 1_📊_Dataset_Overview.py
-│   │   ├── 2_📈_Exploratory_Analysis.py
-│   │   ├── 3_💰_Pricing_Analysis.py
-│   │   ├── 4_⭐_Performance_Metrics.py
-│   │   └── 5_🔍_Comparison_Tools.py
-│   └── utils/
-│       ├── data_utils.py
-│       └── plot_utils.py
+│      ├── 1_Dataset_Overview.py
+│      ├── 2_Exploratory_Analysis.py
+│      ├── 3_Pricing_Analysis.py
+│      ├── 4_Performance_Metrics.py
+│      └── 5_Comparison_Tools.py
+│   
 ├── requirements.txt
-└── README.md
+├── README.md
+├── run_dashboard.py
+└── QUICKSTART.md
 ```
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 ```bash
@@ -114,7 +110,7 @@ streamlit run app.py
 
 The dashboard will open at `http://localhost:8501`
 
-## 📊 Interactive Dashboard Features
+## Interactive Dashboard Features
 
 ### 1. Dataset Overview
 - Key statistics and metrics
@@ -146,30 +142,7 @@ The dashboard will open at `http://localhost:8501`
 - Feature correlation explorer
 - Export filtered data
 
-## 📈 Key Findings
-
-### Dataset Statistics
-- **Total Products**: 42,675
-- **Product Categories**: Multiple electronics categories
-- **Average Rating**: To be calculated
-- **Price Range**: To be calculated
-- **Best Sellers**: To be identified
-
-### Preliminary Insights
-*(Will be updated after analysis)*
-
-## 🛠️ Technologies Used
-- **Python 3.8+**: Core programming language
-- **Pandas**: Data manipulation and analysis
-- **NumPy**: Numerical computations
-- **Matplotlib**: Static visualizations
-- **Seaborn**: Statistical visualizations
-- **Plotly**: Interactive visualizations
-- **Streamlit**: Interactive dashboard
-- **Jupyter**: Notebook environment
-- **SciPy**: Statistical testing
-
-## 📝 Analysis Workflow
+## Analysis Workflow
 
 1. **Data Loading & Validation**
    - Load dataset and verify structure
@@ -196,17 +169,10 @@ The dashboard will open at `http://localhost:8501`
    - Provide actionable insights
    - Suggest business strategies
 
-## 🎓 Learning Outcomes
+## Learning Outcomes
 - Data cleaning and preprocessing techniques
 - Exploratory data analysis methodologies
 - Statistical hypothesis testing
 - Interactive dashboard development
 - Data visualization best practices
 - Business insights derivation
-
-## 📧 Contact & Support
-For questions or issues, please refer to the assignment documentation.
-
----
-
-**Last Updated**: December 4, 2025
