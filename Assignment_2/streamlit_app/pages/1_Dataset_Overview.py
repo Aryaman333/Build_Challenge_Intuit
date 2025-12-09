@@ -91,8 +91,8 @@ with tab2:
     dtype_df = pd.DataFrame({
         'Column': df.dtypes.index,
         'Data Type': df.dtypes.values.astype(str),
-        'Non-Null Count': df.count().values,
-        'Unique Values': [df[col].nunique() for col in df.columns]
+        'Non-Null Count': df.count().values.astype(int),
+        'Unique Values': [int(df[col].nunique()) for col in df.columns]
     })
     st.dataframe(dtype_df, use_container_width=True, hide_index=True)
 

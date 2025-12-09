@@ -128,5 +128,7 @@ def plot_discount_impact(data):
 def create_summary_table(summary_dict):
     """Create formatted summary table."""
     df = pd.DataFrame(list(summary_dict.items()), columns=['Metric', 'Value'])
+    # Convert all values to strings to ensure consistent type for Arrow serialization
+    df['Value'] = df['Value'].astype(str)
     df = df.set_index('Metric')
     return df

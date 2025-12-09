@@ -73,6 +73,11 @@ Assignment_2/
 │   ├── data_loader.py
 │   ├── visualization.py
 │   └── statistical_tests.py
+├── notebooks/
+│   ├── data_insights.ipynb
+│   └── exploratory_data_analysis.ipynb   
+├── tests/
+│    └── test_analysis_methods.py
 ├── streamlit_app/
 │   ├── app.py
 │   ├── pages/
@@ -168,3 +173,36 @@ The dashboard will open at `http://localhost:8501`
    - Document key findings
    - Provide actionable insights
    - Suggest business strategies
+
+##  Jupyter Notebooks Overview
+
+1. **`exploratory_data_analysis.ipynb`** - Initial data exploration  
+   - Premium product identification using filter → map → sort pipeline
+   - Category performance metrics with multi-column aggregation
+   - Discount analysis using reduce operation
+   - Best seller analysis with lambda-based categorization
+
+2. **`data_insights.ipynb`** - In-depth analysis with advanced functional operations
+   - Pricing strategy analysis: Multi-tier filtering with lambda-based binning
+   - Review engagement metrics: Custom aggregation functions with lambda expressions
+   - Sponsored vs Organic comparison: Functional groupBy with apply and pivot
+   - Competitive analysis: Reduce operation for cross-category metrics
+   - Stream pipelines: Complex data transformation chains
+
+##  Unit Tests
+
+Comprehensive test suite covering all analysis methods:
+
+**Location**: `tests/test_analysis_methods.py`
+
+**Test Coverage** (17 tests):
+- `TestDataLoader`: Data loading, filtering, aggregation (stream operations)
+- `TestFunctionalOperations`: Lambda transformations, chained filtering, groupBy, reduce
+- `TestDataQuality`: Data validation and cleaning
+
+**Run Tests**:
+```powershell
+cd tests
+python test_analysis_methods.py
+# Output: Ran 17 tests in ~1.3s - OK ✓
+```
