@@ -168,6 +168,12 @@ self.not_full.notify()  # Wakes one waiting producer
 # Pre-defined scenario
 python cli.py simulate --scenario balanced
 
+# Run ALL scenarios sequentially
+python cli.py simulate --scenario all
+
+# Run ALL scenarios with verbose output
+python cli.py simulate --scenario all --verbose
+
 # Verbose output (shows wait/notify in action)
 python cli.py simulate --scenario fast-producer --verbose
 

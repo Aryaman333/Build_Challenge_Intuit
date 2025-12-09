@@ -12,11 +12,43 @@ from src.scenarios import get_scenario, get_scenario_details, SCENARIOS
 
 
 def simulate_command(args):
+    # Handle "all" scenario - run all predefined scenarios
+    if args.scenario == 'all':
+        print(f"\n{'=' * 70}")
+        print("Running ALL Scenarios")
+        print(f"{'=' * 70}\n")
+        
+        all_success = True
+        for scenario_name in SCENARIOS.keys():
+            config = get_scenario(scenario_name)
+            config.verbose = args.verbose
+            
+            if not args.summary_only:
+                print(f"\n{'=' * 70}\nScenario: {config.scenario_name}\n{'=' * 70}\n")
+                print("Config:")
+                print(f"  Producers: {config.num_producers}, Consumers: {config.num_consumers}")
+                print(f"  Queue capacity: {config.capacity}")
+                print(f"  Items per producer: {config.items_per_producer}")
+                print(f"  Producer delay: {config.producer_delay}s, Consumer delay: {config.consumer_delay}s\n")
+            
+            result = Simulation(config).run()
+            print(result.get_summary())
+            
+            if not result.success:
+                all_success = False
+            
+            print()  # Add spacing between scenarios
+        
+        print(f"{'=' * 70}")
+        print(f"All scenarios completed: {'SUCCESS' if all_success else 'SOME FAILED'}")
+        print(f"{'=' * 70}\n")
+        return 0 if all_success else 1
+    
+    # Handle single scenario or custom configuration
     if args.scenario:
         try:
             config = get_scenario(args.scenario)
-            if args.verbose is not None:
-                config.verbose = args.verbose
+            config.verbose = args.verbose
         except ValueError as e:
             print(f"Error: {e}\n")
             print(get_scenario_details())
@@ -30,7 +62,7 @@ def simulate_command(args):
             items_per_producer=args.items,
             producer_delay=args.producer_delay,
             consumer_delay=args.consumer_delay,
-            verbose=args.verbose if args.verbose is not None else False
+            verbose=args.verbose
         )
     
     if not args.summary_only:
@@ -87,14 +119,14 @@ def main():
     
     # Simulate command
     sim = subparsers.add_parser('simulate', help='Run a producer-consumer simulation')
-    sim.add_argument('--scenario', choices=list(SCENARIOS.keys()), help='Pre-defined scenario')
+    sim.add_argument('--scenario', choices=list(SCENARIOS.keys()) + ['all'], help='Pre-defined scenario (use "all" to run all scenarios)')
     sim.add_argument('--num-producers', type=int, default=2, help='Number of producers (default: 2)')
     sim.add_argument('--num-consumers', type=int, default=2, help='Number of consumers (default: 2)')
     sim.add_argument('--capacity', type=int, default=5, help='Queue capacity (default: 5)')
     sim.add_argument('--items', type=int, default=10, help='Items per producer (default: 10)')
     sim.add_argument('--producer-delay', type=float, default=0.1, help='Producer delay in seconds (default: 0.1)')
     sim.add_argument('--consumer-delay', type=float, default=0.1, help='Consumer delay in seconds (default: 0.1)')
-    sim.add_argument('--verbose', action='store_true', help='Print detailed per-event logs')
+    sim.add_argument('--verbose', action='store_true', default=False, help='Print detailed per-event logs')
     sim.add_argument('--summary-only', action='store_true', help='Only print summary')
     
     # Test command

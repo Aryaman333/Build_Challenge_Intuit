@@ -17,7 +17,13 @@ python cli.py list
 # Run balanced scenario
 python cli.py simulate --scenario balanced
 
-# See detailed logs
+# Run ALL scenarios sequentially
+python cli.py simulate --scenario all
+
+# Run ALL scenarios with verbose logging
+python cli.py simulate --scenario all --verbose
+
+# See detailed logs for a single scenario
 python cli.py simulate --scenario fast-producer --verbose
 ```
 
