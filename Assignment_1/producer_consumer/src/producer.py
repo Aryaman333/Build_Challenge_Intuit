@@ -9,8 +9,8 @@ class Producer(threading.Thread):
     """Producer thread - reads from source and puts items into buffer."""
     
     def __init__(self, producer_id: str, source_container: List[Any], buffer,
-                 delay: float = 0.0, verbose: bool = False, 
-                 log_callback: Optional[Callable] = None):
+                delay: float = 0.0, verbose: bool = False, 
+                log_callback: Optional[Callable] = None):
         super().__init__(name=f"Producer-{producer_id}", daemon=True)
         self.producer_id = producer_id
         self.source_container = source_container
@@ -47,7 +47,7 @@ class Producer(threading.Thread):
                 capacity = self.buffer.capacity
                 status = "(FULL, producers may block)" if buffer_size == capacity else ""
                 self._log(f"[{time.time() - self.start_time:06.3f}s] [{self.producer_id}] "
-                         f"Produced item={item}   | queue size: {buffer_size}/{capacity} {status}")
+                        f"Produced item={item}   | queue size: {buffer_size}/{capacity} {status}")
                 
                 if self.delay > 0:
                     time.sleep(self.delay)
@@ -57,7 +57,7 @@ class Producer(threading.Thread):
         
         self.end_time = time.time()
         self._log(f"[{self.producer_id}] Finished. Produced {self.items_produced} items "
-                 f"in {self.end_time - self.start_time:.3f}s (blocked {self.blocks_encountered} times)")
+                f"in {self.end_time - self.start_time:.3f}s (blocked {self.blocks_encountered} times)")
     
     def get_stats(self) -> dict:
         duration = self.end_time - self.start_time if self.start_time and self.end_time else None

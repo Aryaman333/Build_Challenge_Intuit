@@ -82,7 +82,7 @@ class TestProducerConsumer(unittest.TestCase):
         items_per_producer = 20
         
         sources = [[{'producer_id': i, 'seq': j, 'unique_id': f'P{i}-{j}'} 
-                   for j in range(items_per_producer)] for i in range(num_producers)]
+                for j in range(items_per_producer)] for i in range(num_producers)]
         expected_items = [item['unique_id'] for source in sources for item in source]
         consumed = []
         

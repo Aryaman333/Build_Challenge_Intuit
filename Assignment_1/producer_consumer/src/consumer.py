@@ -9,9 +9,9 @@ class Consumer(threading.Thread):
     """Consumer thread - takes items from buffer and stores in destination."""
     
     def __init__(self, consumer_id: str, buffer, destination_container: List[Any],
-                 num_items: Optional[int] = None, delay: float = 0.0, 
-                 verbose: bool = False, log_callback: Optional[Callable] = None, 
-                 timeout: float = 1.0):
+                num_items: Optional[int] = None, delay: float = 0.0, 
+                verbose: bool = False, log_callback: Optional[Callable] = None, 
+                timeout: float = 1.0):
         super().__init__(name=f"Consumer-{consumer_id}", daemon=True)
         self.consumer_id = consumer_id
         self.buffer = buffer
@@ -67,7 +67,7 @@ class Consumer(threading.Thread):
                 capacity = self.buffer.capacity
                 status = "(EMPTY, consumers may block)" if buffer_size == 0 else ""
                 self._log(f"[{time.time() - self.start_time:06.3f}s] [{self.consumer_id}] "
-                         f"Consumed item={item}   | queue size: {buffer_size}/{capacity} {status}")
+                        f"Consumed item={item}   | queue size: {buffer_size}/{capacity} {status}")
                 
                 if self.delay > 0:
                     time.sleep(self.delay)
@@ -77,7 +77,7 @@ class Consumer(threading.Thread):
         
         self.end_time = time.time()
         self._log(f"[{self.consumer_id}] Finished. Consumed {self.items_consumed} items "
-                 f"in {self.end_time - self.start_time:.3f}s (waited {self.waits_encountered} times)")
+                f"in {self.end_time - self.start_time:.3f}s (waited {self.waits_encountered} times)")
     
     def get_stats(self) -> dict:
         duration = self.end_time - self.start_time if self.start_time and self.end_time else None

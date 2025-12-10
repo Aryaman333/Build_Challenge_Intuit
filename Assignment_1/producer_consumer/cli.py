@@ -78,6 +78,34 @@ def simulate_command(args):
     return 0 if result.success else 1
 
 
+class FormattedTestResult(unittest.TextTestResult):
+    """Custom test result class with better formatting and test class segregation."""
+    
+    def __init__(self, stream, descriptions, verbosity):
+        super().__init__(stream, descriptions, verbosity)
+        self.current_class = None
+    
+    def startTest(self, test):
+        # Extract class name from test
+        test_class = test.__class__.__name__
+        
+        # Print separator when starting a new test class
+        if test_class != self.current_class:
+            if self.current_class is not None:
+                self.stream.writeln()  # Add spacing between test classes
+            self.stream.writeln(f"\n{'=' * 70}")
+            self.stream.writeln(f"Test Class: {test_class}")
+            self.stream.writeln('=' * 70)
+            self.current_class = test_class
+        
+        super().startTest(test)
+
+
+class FormattedTestRunner(unittest.TextTestRunner):
+    """Custom test runner using FormattedTestResult."""
+    resultclass = FormattedTestResult
+
+
 def test_command(args):
     tests_dir = Path(__file__).parent / 'tests'
     if not tests_dir.exists():
@@ -100,9 +128,11 @@ def test_command(args):
         return 1
     
     pattern, message = suite_map[args.suite]
+    print(f"\n{'=' * 70}")
     print(message)
+    print('=' * 70)
     suite = loader.discover(str(tests_dir), pattern=pattern)
-    result = unittest.TextTestRunner(verbosity=2).run(suite)
+    result = FormattedTestRunner(verbosity=2).run(suite)
     return 0 if result.wasSuccessful() else 1
 
 
@@ -132,7 +162,7 @@ def main():
     # Test command
     test = subparsers.add_parser('test', help='Run automated test suites')
     test.add_argument('--suite', choices=['all', 'buffer', 'producer-consumer', 'scenarios'], 
-                     default='all', help='Test suite to run (default: all)')
+                    default='all', help='Test suite to run (default: all)')
     
     # List command
     subparsers.add_parser('list', help='List available scenarios')
