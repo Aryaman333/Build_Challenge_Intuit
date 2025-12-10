@@ -67,26 +67,26 @@ This project provides comprehensive analysis and interactive visualization of Am
 ```
 Assignment_2/
 ├── data/
-│   └── cleaned/
-│       └── amazon_products_sales_data_cleaned.csv
+│   ├── cleaned/
+│   │   └── amazon_products_sales_data_cleaned.csv
+│   └── raw/
+│       └── amazon_products_sales_data_uncleaned.csv
 ├── scripts/
-│   ├── data_loader.py
-│   ├── visualization.py
-│   └── statistical_tests.py
+│   ├── data_loader.py          # Data loading, filtering, aggregation
+│   └── visualization.py         # Plotting and visualization utilities
 ├── notebooks/
 │   ├── data_insights.ipynb
 │   └── exploratory_data_analysis.ipynb   
 ├── tests/
-│    └── test_analysis_methods.py
+│   └── test_analysis_methods.py
 ├── streamlit_app/
 │   ├── app.py
-│   ├── pages/
-│      ├── 1_Dataset_Overview.py
-│      ├── 2_Exploratory_Analysis.py
-│      ├── 3_Pricing_Analysis.py
-│      ├── 4_Performance_Metrics.py
-│      └── 5_Comparison_Tools.py
-│   
+│   └── pages/
+│       ├── 1_Dataset_Overview.py
+│       ├── 2_Exploratory_Analysis.py
+│       ├── 3_Pricing_Analysis.py
+│       ├── 4_Performance_Metrics.py
+│       └── 5_Comparison_Tools.py
 ├── requirements.txt
 ├── README.md
 ├── run_dashboard.py
@@ -109,6 +109,10 @@ jupyter notebook
 
 ### Running Streamlit Dashboard
 ```bash
+# From project root
+python run_dashboard.py
+
+# Or from streamlit_app directory
 cd streamlit_app
 streamlit run app.py
 ```
@@ -191,18 +195,23 @@ The dashboard will open at `http://localhost:8501`
 
 ##  Unit Tests
 
-Comprehensive test suite covering all analysis methods:
+Comprehensive test suite covering data loading, filtering, aggregation, functional operations, and visualizations.
 
 **Location**: `tests/test_analysis_methods.py`
 
-**Test Coverage** (17 tests):
-- `TestDataLoader`: Data loading, filtering, aggregation (stream operations)
-- `TestFunctionalOperations`: Lambda transformations, chained filtering, groupBy, reduce
-- `TestDataQuality`: Data validation and cleaning
+**Test Coverage** (19 tests across 8 test classes):
+- `TestDataLoadingAndQuality`: Data structure, types, and validation (4 tests)
+- `TestSummaryAndAggregation`: Summary stats and aggregations (3 tests)
+- `TestFilteringOperations`: Category, price, and rating filters (3 tests)
+- `TestTopProductsRetrieval`: Top N products with edge cases (3 tests)
+- `TestDataCleaning`: Numeric column cleaning and validation (1 test)
+- `TestFunctionalOperations`: Lambda, chaining, reduce operations (3 tests)
+- `TestVisualization`: Plot creation and edge cases (2 tests)
+- `TestPerformance`: Operation efficiency benchmarks (1 test)
 
 **Run Tests**:
-```powershell
+```bash
 cd tests
 python test_analysis_methods.py
-# Output: Ran 17 tests in ~1.3s - OK ✓
+# Output: Ran 19 tests in ~3s - OK ✓
 ```
