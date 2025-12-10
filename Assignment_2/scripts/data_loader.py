@@ -52,7 +52,7 @@ def get_top_products(df, by='product_rating', n=10, category=None):
     if category:
         df = filter_by_category(df, category)
     return df.nlargest(n, by)[['product_title', 'product_rating', 'total_reviews', 
-                                 'discounted_price', 'product_category']]
+                                'discounted_price', 'product_category']]
 
 
 def get_category_summary(df):
@@ -80,7 +80,7 @@ def get_missing_value_summary(df):
 def clean_numeric_columns(df):
     """Ensure numeric columns are properly formatted."""
     numeric_cols = ['product_rating', 'total_reviews', 'purchased_last_month',
-                   'discounted_price', 'original_price', 'discount_percentage']
+                'discounted_price', 'original_price', 'discount_percentage']
     for col in numeric_cols:
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors='coerce')

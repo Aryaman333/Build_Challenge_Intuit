@@ -17,9 +17,6 @@ from data_loader import (
     filter_by_price_range, filter_by_rating, get_top_products,
     get_category_summary, clean_numeric_columns
 )
-from statistical_tests import (
-    correlation_test, ttest_independent, anova_test
-)
 
 
 class TestDataLoader(unittest.TestCase):
@@ -102,61 +99,6 @@ class TestDataLoader(unittest.TestCase):
         
         # Verify aggregation results
         self.assertTrue(all(summary['product_count'] > 0))
-
-
-# class TestStatisticalAnalysis(unittest.TestCase):
-#     """Test statistical analysis functions."""
-    
-#     @classmethod
-#     def setUpClass(cls):
-#         """Load test data once for all tests."""
-#         cls.df = load_data()
-    
-#     def test_correlation_test(self):
-#         """Test correlation analysis between numeric columns."""
-#         # Test correlation between rating and reviews
-#         result = correlation_test(
-#             self.df, 
-#             'product_rating', 
-#             'total_reviews'
-#         )
-        
-#         self.assertIn('correlation', result)
-#         self.assertIn('p_value', result)
-#         self.assertIn('significant', result)
-#         self.assertIsInstance(bool(result['significant']), bool)
-#         self.assertGreaterEqual(result['correlation'], -1)
-#         self.assertLessEqual(result['correlation'], 1)
-    
-#     def test_ttest_independent(self):
-#         """Test t-test for independent groups."""
-#         # Test if sponsored products differ from organic
-#         if 'Sponsored' in self.df['is_sponsored'].values and 'Organic' in self.df['is_sponsored'].values:
-#             result = ttest_independent(
-#                 self.df,
-#                 'is_sponsored',
-#                 'product_rating',
-#                 'Sponsored',
-#                 'Organic'
-#             )
-            
-#             self.assertIn('p_value', result)
-#             self.assertIn('significant', result)
-#             self.assertIn('group1_mean', result)
-#             self.assertIn('group2_mean', result)
-    
-#     def test_anova_test(self):
-#         """Test ANOVA across multiple categories."""
-#         # Test if ratings differ across categories
-#         result = anova_test(
-#             self.df,
-#             'product_category',
-#             'product_rating'
-#         )
-        
-#         self.assertIn('f_statistic', result)
-#         self.assertIn('p_value', result)
-#         self.assertIn('significant', result)
 
 
 class TestFunctionalOperations(unittest.TestCase):

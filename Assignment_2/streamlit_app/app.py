@@ -157,8 +157,8 @@ try:
     st.markdown("Preview of the first few products in the dataset:")
     
     display_cols = ['product_title', 'product_rating', 'total_reviews', 
-                   'purchased_last_month', 'discounted_price', 'original_price',
-                   'discount_percentage', 'product_category']
+                'purchased_last_month', 'discounted_price', 'original_price',
+                'discount_percentage', 'product_category']
     
     st.dataframe(
         df[display_cols].head(10),

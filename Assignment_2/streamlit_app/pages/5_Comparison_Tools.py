@@ -53,8 +53,8 @@ with tab1:
         # Comparison table
         st.subheader("Comparison Table")
         comparison_cols = ['product_title', 'product_rating', 'total_reviews',
-                          'purchased_last_month', 'discounted_price', 'original_price',
-                          'discount_percentage', 'product_category']
+                        'purchased_last_month', 'discounted_price', 'original_price',
+                        'discount_percentage', 'product_category']
         st.dataframe(comparison_df[comparison_cols], use_container_width=True, hide_index=True)
         
         st.markdown("---")
@@ -111,7 +111,7 @@ with tab1:
         
         # Normalize metrics for radar chart
         metrics_to_compare = ['product_rating', 'total_reviews', 'purchased_last_month',
-                             'discounted_price', 'discount_percentage']
+                            'discounted_price', 'discount_percentage']
         
         fig = go.Figure()
         
@@ -155,7 +155,7 @@ with tab2:
     }).round(2)
     
     category_stats.columns = ['Product Count', 'Avg Rating', 'Avg Reviews', 'Total Reviews',
-                              'Avg Purchases', 'Total Purchases', 'Avg Price', 'Avg Discount %']
+                            'Avg Purchases', 'Total Purchases', 'Avg Price', 'Avg Discount %']
     
     st.subheader("Category Performance Metrics")
     st.dataframe(category_stats, use_container_width=True)
@@ -227,7 +227,7 @@ with tab3:
     
     # Select features to explore
     numeric_features = ['product_rating', 'total_reviews', 'purchased_last_month',
-                       'discounted_price', 'original_price', 'discount_percentage']
+                    'discounted_price', 'original_price', 'discount_percentage']
     
     col1, col2 = st.columns(2)
     
@@ -242,15 +242,15 @@ with tab3:
     # Add price category if needed
     if 'price_category' not in df.columns:
         df['price_category'] = pd.cut(df['discounted_price'],
-                                     bins=[0, 50, 100, 200, float('inf')],
-                                     labels=['Budget', 'Mid-range', 'Premium', 'Luxury'])
+                                    bins=[0, 50, 100, 200, float('inf')],
+                                    labels=['Budget', 'Mid-range', 'Premium', 'Luxury'])
     
     # Scatter plot
     fig = px.scatter(df, x=x_feature, y=y_feature,
                     color=color_by,
                     title=f'{y_feature.replace("_", " ").title()} vs {x_feature.replace("_", " ").title()}',
                     labels={x_feature: x_feature.replace('_', ' ').title(),
-                           y_feature: y_feature.replace('_', ' ').title()},
+                        y_feature: y_feature.replace('_', ' ').title()},
                     hover_data=['product_title'])
     st.plotly_chart(fig, use_container_width=True)
     
@@ -274,16 +274,16 @@ with tab3:
     
     with col1:
         fig = px.histogram(df, x=x_feature, color=color_by,
-                          title=f'{x_feature.replace("_", " ").title()} Distribution',
-                          labels={x_feature: x_feature.replace('_', ' ').title()},
-                          marginal='box')
+                        title=f'{x_feature.replace("_", " ").title()} Distribution',
+                        labels={x_feature: x_feature.replace('_', ' ').title()},
+                        marginal='box')
         st.plotly_chart(fig, use_container_width=True)
     
     with col2:
         fig = px.histogram(df, x=y_feature, color=color_by,
-                          title=f'{y_feature.replace("_", " ").title()} Distribution',
-                          labels={y_feature: y_feature.replace('_', ' ').title()},
-                          marginal='box')
+                        title=f'{y_feature.replace("_", " ").title()} Distribution',
+                        labels={y_feature: y_feature.replace('_', ' ').title()},
+                        marginal='box')
         st.plotly_chart(fig, use_container_width=True)
 
 with tab4:
@@ -296,17 +296,17 @@ with tab4:
     
     with col1:
         export_categories = st.multiselect("Categories", sorted(df['product_category'].unique().tolist()),
-                                          default=sorted(df['product_category'].unique().tolist()))
+                                        default=sorted(df['product_category'].unique().tolist()))
     
     with col2:
         min_rating_export = st.slider("Minimum Rating", 0.0, 5.0, 0.0, 0.1)
     
     with col3:
         price_range_export = st.slider("Price Range",
-                                       float(df['discounted_price'].min()),
-                                       float(df['discounted_price'].max()),
-                                       (float(df['discounted_price'].min()),
-                                        float(df['discounted_price'].max())))
+                                    float(df['discounted_price'].min()),
+                                    float(df['discounted_price'].max()),
+                                    (float(df['discounted_price'].min()),
+                                    float(df['discounted_price'].max())))
     
     # Apply filters
     export_df = df[

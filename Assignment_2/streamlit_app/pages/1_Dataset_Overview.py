@@ -58,7 +58,7 @@ with tab1:
     # Numeric columns summary
     st.subheader("Numeric Features Summary")
     numeric_cols = ['product_rating', 'total_reviews', 'purchased_last_month',
-                   'discounted_price', 'original_price', 'discount_percentage']
+                'discounted_price', 'original_price', 'discount_percentage']
     st.dataframe(df[numeric_cols].describe().T, use_container_width=True)
 
 with tab2:
@@ -79,9 +79,9 @@ with tab2:
     
     # Visualize missing values
     fig = px.bar(missing_df[missing_df['missing_count'] > 0].reset_index(),
-                 x='index', y='missing_percentage',
-                 title='Missing Values Percentage by Column',
-                 labels={'index': 'Column', 'missing_percentage': 'Missing %'})
+                x='index', y='missing_percentage',
+                title='Missing Values Percentage by Column',
+                labels={'index': 'Column', 'missing_percentage': 'Missing %'})
     st.plotly_chart(fig, use_container_width=True)
     
     st.markdown("---")
@@ -106,9 +106,9 @@ with tab3:
     with col1:
         st.subheader("Product Count by Category")
         fig = px.bar(category_summary.reset_index(),
-                     x='product_category', y='product_count',
-                     title='Products per Category',
-                     labels={'product_count': 'Number of Products', 'product_category': 'Category'})
+                    x='product_category', y='product_count',
+                    title='Products per Category',
+                    labels={'product_count': 'Number of Products', 'product_category': 'Category'})
         st.plotly_chart(fig, use_container_width=True)
     
     with col2:
@@ -129,28 +129,28 @@ with tab4:
     with col1:
         st.subheader("Rating Distribution")
         fig = px.histogram(df, x='product_rating', nbins=50,
-                          title='Product Rating Distribution',
-                          labels={'product_rating': 'Rating'})
+                        title='Product Rating Distribution',
+                        labels={'product_rating': 'Rating'})
         st.plotly_chart(fig, use_container_width=True)
         
         st.subheader("Price Distribution")
         fig = px.histogram(df, x='discounted_price', nbins=50,
-                          title='Price Distribution',
-                          labels={'discounted_price': 'Price (USD)'})
+                        title='Price Distribution',
+                        labels={'discounted_price': 'Price (USD)'})
         st.plotly_chart(fig, use_container_width=True)
     
     with col2:
         st.subheader("Discount Distribution")
         fig = px.histogram(df, x='discount_percentage', nbins=50,
-                          title='Discount Percentage Distribution',
-                          labels={'discount_percentage': 'Discount %'})
+                        title='Discount Percentage Distribution',
+                        labels={'discount_percentage': 'Discount %'})
         st.plotly_chart(fig, use_container_width=True)
         
         st.subheader("Reviews Distribution")
         fig = px.histogram(df[df['total_reviews'] < df['total_reviews'].quantile(0.95)],
-                          x='total_reviews', nbins=50,
-                          title='Review Count Distribution (95th percentile)',
-                          labels={'total_reviews': 'Number of Reviews'})
+                        x='total_reviews', nbins=50,
+                        title='Review Count Distribution (95th percentile)',
+                        labels={'total_reviews': 'Number of Reviews'})
         st.plotly_chart(fig, use_container_width=True)
 
 st.markdown("---")

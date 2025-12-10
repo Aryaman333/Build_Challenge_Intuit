@@ -60,18 +60,18 @@ def plot_correlation_heatmap(data, numeric_cols=None):
 def plot_scatter(data, x_col, y_col, color_col=None, title=None):
     """Plot scatter plot."""
     fig = px.scatter(data, x=x_col, y=y_col, color=color_col,
-                     title=title or f'{y_col} vs {x_col}',
-                     labels={x_col: x_col.replace('_', ' ').title(),
+                    title=title or f'{y_col} vs {x_col}',
+                    labels={x_col: x_col.replace('_', ' ').title(),
                             y_col: y_col.replace('_', ' ').title()},
-                     hover_data=['product_title'] if 'product_title' in data.columns else None)
+                    hover_data=['product_title'] if 'product_title' in data.columns else None)
     return fig
 
 
 def plot_box(data, category_col, value_col, title=None):
     """Plot box plot for category comparison."""
     fig = px.box(data, x=category_col, y=value_col,
-                 title=title or f'{value_col.replace("_", " ").title()} by {category_col.replace("_", " ").title()}',
-                 labels={category_col: category_col.replace('_', ' ').title(),
+                title=title or f'{value_col.replace("_", " ").title()} by {category_col.replace("_", " ").title()}',
+                labels={category_col: category_col.replace('_', ' ').title(),
                         value_col: value_col.replace('_', ' ').title()})
     return fig
 
@@ -91,12 +91,12 @@ def plot_price_rating_scatter(data, category=None):
         data = data[data['product_category'] == category]
     
     fig = px.scatter(data, x='discounted_price', y='product_rating',
-                     color='product_category', size='total_reviews',
-                     hover_data=['product_title'],
-                     title='Price vs Rating Analysis',
-                     labels={'discounted_price': 'Price (USD)',
-                            'product_rating': 'Rating (1-5)'},
-                     trendline='ols')
+                    color='product_category', size='total_reviews',
+                    hover_data=['product_title'],
+                    title='Price vs Rating Analysis',
+                    labels={'discounted_price': 'Price (USD)',
+                        'product_rating': 'Rating (1-5)'},
+                    trendline='ols')
     return fig
 
 
@@ -117,11 +117,11 @@ def plot_top_products(data, n=10, by='product_rating'):
 def plot_discount_impact(data):
     """Plot discount percentage impact on purchases."""
     fig = px.scatter(data, x='discount_percentage', y='purchased_last_month',
-                     color='product_category',
-                     title='Discount Impact on Purchase Volume',
-                     labels={'discount_percentage': 'Discount (%)',
-                            'purchased_last_month': 'Purchases Last Month'},
-                     hover_data=['product_title', 'discounted_price'])
+                    color='product_category',
+                    title='Discount Impact on Purchase Volume',
+                    labels={'discount_percentage': 'Discount (%)',
+                        'purchased_last_month': 'Purchases Last Month'},
+                    hover_data=['product_title', 'discounted_price'])
     return fig
 
 

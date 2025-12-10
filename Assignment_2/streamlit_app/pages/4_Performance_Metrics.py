@@ -96,9 +96,9 @@ with tab2:
     with col1:
         # Rating distribution
         fig = px.histogram(filtered_df, x='product_rating', nbins=50,
-                          title='Rating Distribution',
-                          labels={'product_rating': 'Rating'},
-                          color_discrete_sequence=['#FF9900'])
+                        title='Rating Distribution',
+                        labels={'product_rating': 'Rating'},
+                        color_discrete_sequence=['#FF9900'])
         st.plotly_chart(fig, use_container_width=True)
         
         # Rating by category
@@ -121,7 +121,7 @@ with tab2:
         rating_bins = pd.cut(filtered_df['product_rating'],
                             bins=[0, 3, 3.5, 4, 4.5, 5],
                             labels=['Poor (<3)', 'Fair (3-3.5)', 'Good (3.5-4)',
-                                   'Very Good (4-4.5)', 'Excellent (4.5+)'])
+                                'Very Good (4-4.5)', 'Excellent (4.5+)'])
         rating_dist = rating_bins.value_counts()
         
         fig = px.pie(values=rating_dist.values, names=rating_dist.index,
@@ -150,10 +150,10 @@ with tab3:
     with col1:
         # Purchase volume distribution
         fig = px.histogram(filtered_df[filtered_df['purchased_last_month'] < filtered_df['purchased_last_month'].quantile(0.95)],
-                          x='purchased_last_month', nbins=50,
-                          title='Purchase Volume Distribution (95th percentile)',
-                          labels={'purchased_last_month': 'Purchases Last Month'},
-                          color_discrete_sequence=['#146EB4'])
+                        x='purchased_last_month', nbins=50,
+                        title='Purchase Volume Distribution (95th percentile)',
+                        labels={'purchased_last_month': 'Purchases Last Month'},
+                        color_discrete_sequence=['#146EB4'])
         st.plotly_chart(fig, use_container_width=True)
         
         # Purchases vs Rating
@@ -189,7 +189,7 @@ with tab3:
     st.subheader(f"Top {min(20, top_n)} Best Selling Products")
     top_sellers = filtered_df.nlargest(min(20, top_n), 'purchased_last_month')[
         ['product_title', 'purchased_last_month', 'product_rating', 'total_reviews', 
-         'discounted_price', 'product_category']
+        'discounted_price', 'product_category']
     ]
     st.dataframe(top_sellers, use_container_width=True, hide_index=True)
 
@@ -261,7 +261,7 @@ with tab4:
     if len(best_seller_df) > 0:
         st.subheader("All Best Seller Products")
         display_cols = ['product_title', 'product_rating', 'total_reviews',
-                       'purchased_last_month', 'discounted_price', 'product_category']
+                    'purchased_last_month', 'discounted_price', 'product_category']
         st.dataframe(best_seller_df[display_cols].sort_values('product_rating', ascending=False),
                     use_container_width=True, hide_index=True)
 

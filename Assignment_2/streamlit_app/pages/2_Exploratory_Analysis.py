@@ -79,32 +79,32 @@ with tab1:
     with col1:
         # Rating distribution
         fig = px.histogram(filtered_df, x='product_rating',
-                          title='Rating Distribution',
-                          labels={'product_rating': 'Rating'},
-                          color_discrete_sequence=['#FF9900'])
+                        title='Rating Distribution',
+                        labels={'product_rating': 'Rating'},
+                        color_discrete_sequence=['#FF9900'])
         st.plotly_chart(fig, use_container_width=True)
         
         # Discount distribution
         fig = px.histogram(filtered_df, x='discount_percentage',
-                          title='Discount Percentage Distribution',
-                          labels={'discount_percentage': 'Discount %'},
-                          color_discrete_sequence=['#146EB4'])
+                        title='Discount Percentage Distribution',
+                        labels={'discount_percentage': 'Discount %'},
+                        color_discrete_sequence=['#146EB4'])
         st.plotly_chart(fig, use_container_width=True)
     
     with col2:
         # Price distribution
         fig = px.histogram(filtered_df, x='discounted_price',
-                          title='Price Distribution',
-                          labels={'discounted_price': 'Price (USD)'},
-                          color_discrete_sequence=['#232F3E'])
+                        title='Price Distribution',
+                        labels={'discounted_price': 'Price (USD)'},
+                        color_discrete_sequence=['#232F3E'])
         st.plotly_chart(fig, use_container_width=True)
         
         # Reviews distribution
         fig = px.histogram(filtered_df[filtered_df['total_reviews'] < filtered_df['total_reviews'].quantile(0.95)],
-                          x='total_reviews',
-                          title='Review Count Distribution',
-                          labels={'total_reviews': 'Number of Reviews'},
-                          color_discrete_sequence=['#00A8E1'])
+                        x='total_reviews',
+                        title='Review Count Distribution',
+                        labels={'total_reviews': 'Number of Reviews'},
+                        color_discrete_sequence=['#00A8E1'])
         st.plotly_chart(fig, use_container_width=True)
 
 with tab2:
@@ -112,7 +112,7 @@ with tab2:
     
     # Correlation heatmap
     numeric_cols = ['product_rating', 'total_reviews', 'purchased_last_month',
-                   'discounted_price', 'original_price', 'discount_percentage']
+                'discounted_price', 'original_price', 'discount_percentage']
     
     corr_matrix = filtered_df[numeric_cols].corr()
     
@@ -202,16 +202,16 @@ with tab4:
     with col2:
         # Violin plot for discounts
         fig = px.violin(filtered_df, x='product_category', y='discount_percentage',
-                       title='Discount Distribution by Category',
-                       labels={'product_category': 'Category', 'discount_percentage': 'Discount %'},
-                       box=True)
+                    title='Discount Distribution by Category',
+                    labels={'product_category': 'Category', 'discount_percentage': 'Discount %'},
+                    box=True)
         st.plotly_chart(fig, use_container_width=True)
         
         # Sponsored vs Organic comparison
         fig = px.histogram(filtered_df, x='product_category', color='is_sponsored',
-                          title='Sponsored vs Organic by Category',
-                          labels={'product_category': 'Category'},
-                          barmode='group')
+                        title='Sponsored vs Organic by Category',
+                        labels={'product_category': 'Category'},
+                        barmode='group')
         st.plotly_chart(fig, use_container_width=True)
 
 st.markdown("---")

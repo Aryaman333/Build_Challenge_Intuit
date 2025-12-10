@@ -26,9 +26,9 @@ df = load_dataset()
 # Calculate price metrics
 df['price_difference'] = df['original_price'] - df['discounted_price']
 df['price_category'] = pd.cut(df['discounted_price'],
-                               bins=[0, 50, 100, 200, float('inf')],
-                               labels=['Budget (<$50)', 'Mid-range ($50-$100)',
-                                      'Premium ($100-$200)', 'Luxury (>$200)'])
+                            bins=[0, 50, 100, 200, float('inf')],
+                            labels=['Budget (<$50)', 'Mid-range ($50-$100)',
+                                    'Premium ($100-$200)', 'Luxury (>$200)'])
 
 # Sidebar
 st.sidebar.header("Price Filters")
@@ -68,9 +68,9 @@ with tab1:
     with col1:
         # Price histogram
         fig = px.histogram(filtered_df, x='discounted_price', nbins=50,
-                          title='Current Price Distribution',
-                          labels={'discounted_price': 'Price (USD)'},
-                          color_discrete_sequence=['#FF9900'])
+                        title='Current Price Distribution',
+                        labels={'discounted_price': 'Price (USD)'},
+                        color_discrete_sequence=['#FF9900'])
         st.plotly_chart(fig, use_container_width=True)
         
         # Price by category
@@ -97,9 +97,9 @@ with tab1:
                             name='Discounted Price',
                             marker_color='#FF9900'))
         fig.update_layout(title='Original vs Discounted Price by Category',
-                         barmode='group',
-                         xaxis_title='Category',
-                         yaxis_title='Average Price (USD)')
+                        barmode='group',
+                        xaxis_title='Category',
+                        yaxis_title='Average Price (USD)')
         st.plotly_chart(fig, use_container_width=True)
         
         # Price category distribution
@@ -117,9 +117,9 @@ with tab2:
     with col1:
         # Discount distribution
         fig = px.histogram(filtered_df, x='discount_percentage', nbins=50,
-                          title='Discount Percentage Distribution',
-                          labels={'discount_percentage': 'Discount %'},
-                          color_discrete_sequence=['#146EB4'])
+                        title='Discount Percentage Distribution',
+                        labels={'discount_percentage': 'Discount %'},
+                        color_discrete_sequence=['#146EB4'])
         st.plotly_chart(fig, use_container_width=True)
         
         # Discount vs Purchases
@@ -127,15 +127,15 @@ with tab2:
                         color='product_rating',
                         title='Discount Impact on Purchase Volume',
                         labels={'discount_percentage': 'Discount %',
-                               'purchased_last_month': 'Purchases Last Month'})
+                            'purchased_last_month': 'Purchases Last Month'})
         st.plotly_chart(fig, use_container_width=True)
     
     with col2:
         # Discount by category
         fig = px.violin(filtered_df, x='product_category', y='discount_percentage',
-                       title='Discount Distribution by Category',
-                       labels={'product_category': 'Category', 'discount_percentage': 'Discount %'},
-                       box=True, color='product_category')
+                    title='Discount Distribution by Category',
+                    labels={'product_category': 'Category', 'discount_percentage': 'Discount %'},
+                    box=True, color='product_category')
         fig.update_layout(xaxis=dict(tickangle=45))
         st.plotly_chart(fig, use_container_width=True)
         
@@ -165,7 +165,7 @@ with tab3:
         # Value score (rating per dollar)
         filtered_df['value_score'] = filtered_df['product_rating'] / filtered_df['discounted_price'] * 100
         top_value = filtered_df.nlargest(10, 'value_score')[['product_title', 'product_rating', 
-                                                               'discounted_price', 'value_score']]
+                                                            'discounted_price', 'value_score']]
         st.subheader("Top 10 Best Value Products")
         st.dataframe(top_value, use_container_width=True, hide_index=True)
     
